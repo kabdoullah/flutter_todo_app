@@ -36,6 +36,7 @@ class TodoService {
   Future<List<Todo>> getCompletedTodos() async {
     _completedTodos = await Hive.openBox<Todo>("completedTodo");
     final completedTasks = _completedTodos.values;
+    _completedTodos.clear();
     return completedTasks.toList();
   }
 

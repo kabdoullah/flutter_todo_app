@@ -47,18 +47,20 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       todoService.removeTodo(todo),
       completedTodos = List.from(completedTodos)
         ..insert(0, todo.copyWith(isDone: true)),
-      todoService.updateTodo(todo),
-      todoService.addCompletedTodo(todo)
+      todoService.addCompletedTodo(todo),
+      todoService.updateCompletedTodo(todo),
+      //todoService.updateTodo(todo),
+
     }
         : {
       completedTodos = List.from(completedTodos)
         ..remove(todo)
     ,
-    todoService.removeTodo(todo),
+    todoService.removeCompletedTodo(todo),
     allTodos = List.from(allTodos)
     ..insert(0, todo.copyWith(isDone: false)),
     todoService.updateTodo(todo),
-    todoService.addCompletedTodo(todo)
+
     };
 
     emit(TodoLoadedState(
